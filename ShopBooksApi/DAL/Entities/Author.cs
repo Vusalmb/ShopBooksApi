@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace ShopBooksApi.DAL.Entities
 {
-    public class Author
+    public class Author:BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public int BookCount { get; set; }
+        public bool DisplayStatus { get; set; }
         public List<Book> Books { get; set; }
     }
 }

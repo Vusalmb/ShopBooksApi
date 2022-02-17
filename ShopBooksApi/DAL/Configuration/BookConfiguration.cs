@@ -17,6 +17,13 @@ namespace ShopBooksApi.DAL.Configuration
             builder.Property(d => d.Detail).HasMaxLength(500).IsRequired(true);
             builder.Property(l => l.Language).HasMaxLength(50).IsRequired(true);
             builder.Property(p => p.Price).IsRequired(true);
+            builder.Property(p => p.Publishing).HasMaxLength(50).IsRequired(true);
+            builder.Property(p => p.Cover).HasMaxLength(50).IsRequired(true);
+            builder.Property(p => p.Weight).HasMaxLength(50).IsRequired(true);
+            builder.Property(p => p.PageCount).IsRequired(true);
+            builder.Property(p => p.IsDelete).HasDefaultValue(false);
+            builder.Property(p => p.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(p => p.ModifiedAt).HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }

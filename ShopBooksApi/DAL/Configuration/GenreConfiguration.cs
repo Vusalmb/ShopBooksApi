@@ -13,6 +13,9 @@ namespace ShopBooksApi.DAL.Configuration
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
             builder.Property(n => n.Name).HasMaxLength(50);
+            builder.Property(p => p.IsDelete).HasDefaultValue(false);
+            builder.Property(p => p.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
+            builder.Property(p => p.ModifiedAt).HasDefaultValueSql("GETUTCDATE()");
         }
     }
 }
