@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopBooksApi.Apps.AdminApi.DTOs.GenreDTOs;
 using ShopBooksApi.DAL.Data;
 using ShopBooksApi.DAL.Entities;
@@ -17,31 +19,27 @@ namespace ShopBooksApi.Controllers
     {
         private readonly ShopDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public GenresController(ShopDbContext context, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+
+        public GenresController(ShopDbContext context, IWebHostEnvironment env, IMapper mapper)
         {
             _context = context;
             _env = env;
+            _mapper = mapper;
         }
 
         [Route("get/{id}")]
         [HttpGet]
         public IActionResult Get(int id)
         {
-            Genre genre = _context.Genres.FirstOrDefault(b => b.Id == id & !b.IsDelete);
+            Genre genre = _context.Genres.Include(g=>g.Books).FirstOrDefault(b => b.Id == id & !b.IsDelete);
 
             if (genre == null)
             {
                 return NotFound();
             }
 
-            GenreGetDTO genreGet = new GenreGetDTO
-            {
-                Id = genre.Id,
-                Name = genre.Name,
-                DisplayStatus = genre.DisplayStatus,
-                CreatedAt = genre.CreatedAt,
-                ModifiedAt = genre.ModifiedAt
-            };
+            GenreGetDTO genreGet = _mapper.Map<GenreGetDTO>(genre);
 
             return Ok(genreGet);
         }

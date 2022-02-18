@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopBooksApi.Apps.AdminApi.DTOs.AuthorDTOs;
 using ShopBooksApi.DAL.Data;
 using ShopBooksApi.DAL.Entities;
@@ -18,32 +20,27 @@ namespace ShopBooksApi.Controllers
     {
         private readonly ShopDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public AuthorsController(ShopDbContext context, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+
+        public AuthorsController(ShopDbContext context, IWebHostEnvironment env, IMapper mapper)
         {
             _context = context;
             _env = env;
+            _mapper = mapper;
         }
 
         [Route("get/{id}")]
         [HttpGet]
         public IActionResult Get(int id)
         {
-            Author author = _context.Authors.FirstOrDefault(b => b.Id == id & !b.IsDelete);
+            Author author = _context.Authors.Include(a=>a.Books).FirstOrDefault(b => b.Id == id & !b.IsDelete);
 
             if (author == null)
             {
                 return NotFound();
             }
 
-            AuthorGetDTO authorGet = new AuthorGetDTO
-            {
-                Id = author.Id,
-                Name = author.Name,
-                Image = author.Image,
-                DisplayStatus = author.DisplayStatus,
-                CreatedAt = author.CreatedAt,
-                ModifiedAt = author.ModifiedAt
-            };
+            AuthorGetDTO authorGet = _mapper.Map<AuthorGetDTO>(author);
 
             return Ok(authorGet);
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +21,13 @@ namespace ShopBooksApi.Controllers
     {
         private readonly ShopDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public BooksController(ShopDbContext context, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+
+        public BooksController(ShopDbContext context, IWebHostEnvironment env, IMapper mapper)
         {
             _context = context;
             _env = env;
+            _mapper = mapper;
         }
 
         [Route("get/{id}")]
@@ -37,34 +41,7 @@ namespace ShopBooksApi.Controllers
                 return NotFound();
             }
 
-            BookGetDTO bookGet = new BookGetDTO
-            {
-                Id = book.Id,
-                Name = book.Name,
-                Image = book.Image,
-                Detail = book.Detail,
-                Language = book.Language,
-                Publishing = book.Publishing,
-                Cover = book.Cover,
-                Weight = book.Weight,
-                DisplayStatus = book.DisplayStatus,
-                PageCount = book.PageCount,
-                Price = book.Price,
-                CreatedAt = book.CreatedAt,
-                ModifiedAt = book.ModifiedAt,
-                Author = new AuthorInBookGetDTO
-                {
-                    Id = book.AuthorId,
-                    Name = book.Author.Name,
-                    BookCounts = book.Author.Books.Count
-                },
-                Genre = new GenreInBookGetDTO
-                {
-                    Id = book.GenreId,
-                    Name = book.Genre.Name,
-                    BookCounts = book.Genre.Books.Count
-                }
-            };
+            BookGetDTO bookGet = _mapper.Map<BookGetDTO>(book);
 
             return Ok(bookGet);
         }
