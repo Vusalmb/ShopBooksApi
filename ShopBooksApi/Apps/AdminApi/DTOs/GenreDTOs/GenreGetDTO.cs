@@ -12,5 +12,6 @@ namespace ShopBooksApi.Apps.AdminApi.DTOs.GenreDTOs
         public bool DisplayStatus { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public int BooksCount { get; set; }
     }
 }
