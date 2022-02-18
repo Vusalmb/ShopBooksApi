@@ -28,13 +28,13 @@ namespace ShopBooksApi.Apps.AdminApi.DTOs.BookDTOs
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int BookCounts { get; set; }
+        public int BooksCount { get; set; }
     }
 
     public class GenreInBookGetDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int BookCounts { get; set; }
+        public int BooksCount { get; set; }
     }
 }
