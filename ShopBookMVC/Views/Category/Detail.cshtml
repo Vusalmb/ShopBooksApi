@@ -1,0 +1,13 @@
+﻿@model CategoryListDTO
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container">
+    <div class="row">
+         <div class="col-lg-3">
+             <h2>@Model.Items.FirstOrDefault().Name</h2>
+             <img src="~/image/@Model.Items.FirstOrDefault().Image" alt="" />
+         </div>
+    </div>
+</div>
