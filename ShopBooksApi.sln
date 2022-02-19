@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBooksApi", "ShopBooksApi\ShopBooksApi.csproj", "{8647887E-E63C-4FB4-826D-33D799873FE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBooksApi", "ShopBooksApi\ShopBooksApi.csproj", "{8647887E-E63C-4FB4-826D-33D799873FE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopBookMVC", "ShopBookMVC\ShopBookMVC.csproj", "{4CF02E53-AF7E-4998-939D-D09D46D6E42A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8647887E-E63C-4FB4-826D-33D799873FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8647887E-E63C-4FB4-826D-33D799873FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8647887E-E63C-4FB4-826D-33D799873FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF02E53-AF7E-4998-939D-D09D46D6E42A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF02E53-AF7E-4998-939D-D09D46D6E42A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF02E53-AF7E-4998-939D-D09D46D6E42A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF02E53-AF7E-4998-939D-D09D46D6E42A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
